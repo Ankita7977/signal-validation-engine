@@ -1,69 +1,123 @@
-# Signal Validation & Enforcement Engine
+🚀 Signal Validation & Enforcement Engine (Trust Layer)
+📌 Overview
 
-## Overview
+This project implements a strict validation and enforcement layer that ensures only trusted, well-structured signals enter the system.
 
-This project implements a validation layer that checks incoming signal data before it enters the system database.
+It acts as a trust boundary between incoming data and the database.
 
-The validator ensures that only correct data is accepted and incorrect data is rejected and logged.
+The system guarantees:
 
----
+No invalid data enters the pipeline
+No silent failures occur
+Every signal is traceable
+Every signal has a confidence score
 
-## Validation Rules
+⚙️ System Flow
+data → validation (this layer) → pipeline → database
 
-The system checks the following:
+Validation Rules
+1. Dataset ID (NEW)
+Must exist
+Must not be empty
+→ Missing → REJECT
 
-1. Timestamp
-   - Must exist
-   - Must be in format YYYY-MM-DD HH:MM:SS
+2. Timestamp (UPGRADED)
+Must exist
+Must follow format: YYYY-MM-DD HH:MM:SS
+Must NOT be a future timestamp
+→ Invalid → REJECT
 
-2. Coordinates
-   - Latitude must be between -90 and 90
-   - Longitude must be between -180 and 180
+3. Coordinates
+Latitude must be between -90 and 90
+Longitude must be between -180 and 180
+→ Invalid → REJECT
 
-3. Feature Type
-   Allowed values:
-   - movement
-   - communication
-   - environmental
+4. Feature Type (STRICT)
 
-4. Value
-   - Must be a number or null
+Allowed values:
 
----
+movement
+communication
+environmental
 
-## Decision Output
+→ Anything else → REJECT
 
-The validator returns:
+5. Value (UPGRADED)
 
-ALLOW — if data is valid  
-REJECT — if data is invalid  
+Accepted:
 
-Each rejection includes a reason.
+Integer / Float
+Null
 
----
+Rejected:
 
-## Logging
+Strings (e.g., "abc")
+Invalid data types
 
-Rejected signals are recorded in:
+🧠 Decision Engine Output
+Each signal returns:
+{
+  "status": "ALLOW / REJECT",
+  "reason": "Explanation",
+  "confidence_score": 0.0 - 1.0
+}
 
+📊 Confidence Scoring (NEW)
+
+Confidence is calculated dynamically:
+
+Clean signal → 0.8 – 1.0
+Minor issues (e.g., null value) → 0.5 – 0.7
+Invalid signal → 0.0
+
+This ensures signals are not just valid, but also trust-rated.
+
+📝 Logging System (UPGRADED)
+Rejected signals are stored in:
 logs/rejected_signals.log
+Each log entry contains:
+timestamp | signal_id | dataset_id | reason
 
-Each log entry includes:
+🔗 Pipeline Integration 
+The validation layer is integrated into a mock pipeline:
+for signal:
+    result = validate(signal)
 
-- signal_id
-- reason
-- timestamp
+    if result["status"] == "ALLOW":
+        print("Inserted")
+    else:
+        print("Rejected")
 
----
 
-## How to Run
+Test Cases
+The system includes edge case testing for:
 
-Run the test file:
+Missing dataset_id
+Future timestamp
+Invalid coordinates
+Invalid feature type
+String value ("45")
+Null value
 
+▶️ How to Run
+Run test cases:
 python tests/test_validator.py
 
----
+Run demo validation:
+python run_demo_validation.py
 
-## Result
+🎯 Result
 
-The system prevents incorrect data from entering the pipeline and ensures data integrity.
+This system ensures:
+
+Only validated signals enter the system
+Invalid signals are rejected with clear reasons
+Every signal has a confidence score
+Full traceability is maintained
+
+🚀 Impact
+
+This implementation upgrades the system from:
+➡ Basic validation
+to
+➡ Trust Enforcement Layer with Scoring
