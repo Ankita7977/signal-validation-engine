@@ -9,7 +9,7 @@ signals = [
         "longitude": 77.2,
         "feature_type": "movement",
         "value": 45
-    },
+    }, 
     {
         "signal_id": 2,
         "timestamp": "2025-03-25 10:30:00"
