@@ -7,7 +7,7 @@ sys.path.append(
     )
 )
 
-from src.validation.signal_validator import validate_signal
+from src.validation.signal_validator import validate_signal 
 
 
 signals = [
