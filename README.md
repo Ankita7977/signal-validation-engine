@@ -83,17 +83,18 @@ timestamp | signal_id | dataset_id | reason
 
 
 **🔗 Pipeline Integration**
+
 The validation layer is integrated into a mock pipeline:
 for signal:
     result = validate(signal)
-
     if result["status"] == "ALLOW":
         print("Inserted")
     else:
         print("Rejected")
 
 
-Test Cases
+**Test Cases**
+
 The system includes edge case testing for:
 
 Missing dataset_id
@@ -104,6 +105,7 @@ String value ("45")
 Null value
 
 **▶️ How to Run**
+
 Run test cases:
 python tests/test_validator.py
 
