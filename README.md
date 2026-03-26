@@ -1,4 +1,5 @@
-🚀 Signal Validation & Enforcement Engine (Trust Layer)
+**🚀 Signal Validation & Enforcement Engine (Trust Layer)**
+
 📌 Overview
 
 This project implements a strict validation and enforcement layer that ensures only trusted, well-structured signals enter the system.
@@ -12,7 +13,8 @@ No silent failures occur
 Every signal is traceable
 Every signal has a confidence score
 
-⚙️ System Flow
+**⚙️ System Flow**
+
 data → validation (this layer) → pipeline → database
 
 Validation Rules
@@ -35,7 +37,6 @@ Longitude must be between -180 and 180
 4. Feature Type (STRICT)
 
 Allowed values:
-
 movement
 communication
 environmental
@@ -45,16 +46,14 @@ environmental
 5. Value (UPGRADED)
 
 Accepted:
-
 Integer / Float
 Null
-
 Rejected:
-
 Strings (e.g., "abc")
 Invalid data types
 
-🧠 Decision Engine Output
+
+**🧠 Decision Engine Output**
 Each signal returns:
 {
   "status": "ALLOW / REJECT",
@@ -62,7 +61,8 @@ Each signal returns:
   "confidence_score": 0.0 - 1.0
 }
 
-📊 Confidence Scoring (NEW)
+
+**📊 Confidence Scoring (NEW)**
 
 Confidence is calculated dynamically:
 
@@ -72,13 +72,16 @@ Invalid signal → 0.0
 
 This ensures signals are not just valid, but also trust-rated.
 
-📝 Logging System (UPGRADED)
+
+**📝 Logging System**
+
 Rejected signals are stored in:
 logs/rejected_signals.log
 Each log entry contains:
 timestamp | signal_id | dataset_id | reason
 
-🔗 Pipeline Integration 
+
+**🔗 Pipeline Integration**
 The validation layer is integrated into a mock pipeline:
 for signal:
     result = validate(signal)
@@ -99,14 +102,15 @@ Invalid feature type
 String value ("45")
 Null value
 
-▶️ How to Run
+**▶️ How to Run**
 Run test cases:
 python tests/test_validator.py
 
 Run demo validation:
 python run_demo_validation.py
 
-🎯 Result
+
+**🎯 Result**
 
 This system ensures:
 
@@ -115,7 +119,8 @@ Invalid signals are rejected with clear reasons
 Every signal has a confidence score
 Full traceability is maintained
 
-🚀 Impact
+
+**Impact**
 
 This implementation upgrades the system from:
 ➡ Basic validation
