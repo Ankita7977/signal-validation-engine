@@ -1,6 +1,6 @@
 **🚀 Signal Validation & Enforcement Engine (Trust Layer)**
 
-📌 Overview
+**📌 Overview**
 
 This project implements a strict validation and enforcement layer that ensures only trusted, well-structured signals enter the system.
 
