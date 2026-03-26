@@ -1,3 +1,5 @@
-2026-03-25 13:09:20.582943 | Signal ID: 2 | Reason: Missing timestamp
-2026-03-25 13:09:20.583513 | Signal ID: 3 | Reason: Latitude out of range
-2026-03-25 13:09:20.583775 | Signal ID: 4 | Reason: Invalid feature type
+2026-03-26 09:22:59.113778 | 2 | None | Missing dataset_id
+2026-03-26 09:22:59.114266 | 3 | 1 | Future timestamp not allowed
+2026-03-26 09:22:59.114947 | 4 | 1 | Latitude out of range
+2026-03-26 09:22:59.115211 | 5 | 1 | Value must be number or null
+2026-03-26 09:27:33.511565 | 2 | None | Missing dataset_id
