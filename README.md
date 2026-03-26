@@ -54,6 +54,7 @@ Invalid data types
 
 
 **🧠 Decision Engine Output**
+
 Each signal returns:
 {
   "status": "ALLOW / REJECT",
